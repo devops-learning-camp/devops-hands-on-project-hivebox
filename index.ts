@@ -1,3 +1,7 @@
 const APP_VERSION = 'v0.0.1';
 
-console.log(APP_VERSION);
+function printAppVersion(): void {
+  console.log(APP_VERSION);
+}
+
+printAppVersion();
