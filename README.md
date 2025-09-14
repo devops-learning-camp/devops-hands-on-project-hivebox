@@ -52,4 +52,53 @@ Here is a pre-start checklist:
 
 ## Implementation
 
-** ADD YOUR IMPLEMENTATION DOCUMENTATION HERE **
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- [pnpm](https://pnpm.io/) package manager (v10.16.0 or later)
+- [Docker](https://www.docker.com/) (for containerized deployment)
+
+### Running the Application
+
+This application simply displays the current app version and exits.
+
+#### Option 1: Using pnpm (Development)
+
+1. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+2. **Run the application:**
+   ```bash
+   pnpm start
+   ```
+
+   This will execute the TypeScript file directly using Node.js and display the current app version.
+
+#### Option 2: Using Docker (Production)
+
+1. **Build the Docker image:**
+   ```bash
+   docker build -t hivebox-app .
+   ```
+
+2. **Run the Docker container:**
+   ```bash
+   docker run --rm hivebox-app
+   ```
+
+   The application will run inside the container and output the app version.
+
+### Available Scripts
+
+- `pnpm start` - Run the application
+- `pnpm test` - Run tests (currently not implemented)
+
+### Development Notes
+
+- The application is written in TypeScript
+- Current version: v0.0.1
+- Uses pnpm for efficient dependency management
+- Configured for production deployment via Docker
+- Includes linting setup with ESLint and TypeScript support
