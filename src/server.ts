@@ -1,18 +1,15 @@
 import Fastify from 'fastify';
 
 import config from './config.ts';
+import routes from './routes.ts';
 
 const fastify = Fastify({
   logger: true,
 });
 
-fastify.get('/version', function (request, reply) {
-  reply.send({ version: config.appVer });
-});
+fastify.decorate('config', config);
 
-fastify.get('/temperature', function (request, reply) {
-  reply.send({ message: 'To be implemented' });
-});
+fastify.register(routes);
 
 fastify.listen({ port: config.port }, function (err, address) {
   if (err) {
