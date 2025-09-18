@@ -18,10 +18,13 @@ fastify.decorate('senseBoxService', senseBoxService);
 
 fastify.register(routes);
 
-fastify.listen({ port: config.port }, function (err, address) {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
+fastify.listen(
+  { port: config.port, host: config.host },
+  function (err, address) {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+    fastify.log.info(`Server listening on ${address}`);
   }
-  fastify.log.info(`Server listening on ${address}`);
-});
+);

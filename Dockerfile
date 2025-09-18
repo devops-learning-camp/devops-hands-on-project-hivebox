@@ -45,4 +45,4 @@ ENV NODE_ENV production
 USER hiveboxuser
 
 # Default command to run your Node.js application
-CMD ["node", "./index.ts"]
+CMD ["node", "./src/server.ts"]
