@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node src/server.ts",
     "test": "node --test tests/*",
-    "lint": "eslint src/*.ts"
+    "lint": "eslint src/*.ts",
+    "lint:docker": "docker run --rm -i hadolint/hadolint < Dockerfile",
+    "lint:docker:ci": "docker run --rm -i hadolint/hadolint < Dockerfile || exit 1"
   },
   "keywords": [],
   "author": "",
