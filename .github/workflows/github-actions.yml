@@ -67,6 +67,11 @@ jobs:
     name: Build Docker image and smoke test
     needs: test
     runs-on: ubuntu-latest
+    env:
+      HOST: ${{ vars.HOST }}
+      PORT: ${{ vars.PORT }}
+      APP_VERSION: ${{ vars.APP_VERSION }}
+      SENSE_BOX_IDS: ${{ vars.SENSE_BOX_IDS }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -86,11 +91,6 @@ jobs:
           tags: hivebox:${{ github.sha }}
 
       - name: Run container
-        env:
-          HOST: ${{ vars.HOST }}
-          PORT: ${{ vars.PORT }}
-          APP_VERSION: ${{ vars.APP_VERSION }}
-          SENSE_BOX_IDS: ${{ vars.SENSE_BOX_IDS }}
         run: |
           docker run -d --rm -p 3000:3000 \
             -e HOST="$HOST" \
