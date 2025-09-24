@@ -64,7 +64,7 @@ jobs:
         run: pnpm test
 
   build:
-    name: Build Docker image
+    name: Build Docker image and smoke test
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -82,4 +82,15 @@ jobs:
         with:
           context: .
           push: false
+          load: true
           tags: hivebox:${{ github.sha }}
+
+      - name: Run container
+        run: docker run -d --rm -p 3000:3000 -e HOST=0.0.0.0 --name hivebox-app hivebox:${{ github.sha }}
+
+      - name: Smoke test /version
+        run: curl --retry 10 --retry-delay 2 --retry-all-errors --fail http://localhost:3000/version
+
+      - name: Cleanup
+        if: always()
+        run: docker rm -f hivebox-app || true
