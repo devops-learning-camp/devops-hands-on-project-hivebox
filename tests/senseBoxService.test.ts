@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import { SenseBoxService } from '../src/senseBoxService.ts';
-import * as senseBoxAPI from '../src/senseBoxAPI.ts';
 
 test('SenseBoxService.extractValidTemperatures returns only numbers', () => {
   const input = { a: 10, b: null, c: 20, e: 0 };
@@ -38,7 +37,7 @@ test('SenseBoxService.getAverageTemperatureForSenseBoxes returns correct average
       return { averageTemperature, temperatures };
     }
   }
-  const service = new MockService();
+  const service = new MockService({} as any);
   const result = await service.getAverageTemperatureForSenseBoxes(
     ['a', 'b', 'c'],
     3600_000
@@ -58,7 +57,7 @@ test('SenseBoxService.getAverageTemperatureForSenseBoxes returns null average if
       return { averageTemperature, temperatures };
     }
   }
-  const service = new MockService();
+  const service = new MockService({} as any);
   const result = await service.getAverageTemperatureForSenseBoxes(
     ['a', 'b'],
     3600_000
@@ -78,7 +77,7 @@ test('SenseBoxService.getAverageTemperatureForSenseBoxes returns correct average
       return { averageTemperature, temperatures };
     }
   }
-  const service = new MockService();
+  const service = new MockService({} as any);
   const result = await service.getAverageTemperatureForSenseBoxes(
     ['a', 'b', 'c'],
     3600_000

@@ -7,5 +7,12 @@ import tseslint from 'typescript-eslint';
 export default defineConfig(
   eslint.configs.recommended,
   tseslint.configs.recommended,
-  globalIgnores(['node_modules/', '*.test.ts'])
+  // keep ESLint ignores aligned with tsconfig exclusions
+  globalIgnores([
+    'node_modules/',
+    'dist/',
+    'tests/',
+    '**/*.test.ts',
+    '**/*.spec.ts',
+  ])
 );
