@@ -86,7 +86,18 @@ jobs:
           tags: hivebox:${{ github.sha }}
 
       - name: Run container
-        run: docker run -d --rm -p 3000:3000 -e HOST=0.0.0.0 --name hivebox-app hivebox:${{ github.sha }}
+        env:
+          HOST: ${{ vars.HOST }}
+          PORT: ${{ vars.PORT }}
+          APP_VERSION: ${{ vars.APP_VERSION }}
+          SENSE_BOX_IDS: ${{ vars.SENSE_BOX_IDS }}
+        run: |
+          docker run -d --rm -p 3000:3000 \
+            -e HOST="$HOST" \
+            -e PORT="$PORT" \
+            -e APP_VERSION="$APP_VERSION" \
+            -e SENSE_BOX_IDS="$SENSE_BOX_IDS" \
+            --name hivebox-app hivebox:${{ github.sha }}
 
       - name: Smoke test /version
         run: curl --retry 10 --retry-delay 2 --retry-all-errors --fail http://localhost:3000/version
