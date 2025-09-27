@@ -85,7 +85,7 @@ This application simply displays the current app version and exits.
 
 2. **Run the Docker container:**
    ```bash
-   docker run --rm hivebox-app
+   docker run --rm -p 3000:3000 -e HOST=0.0.0.0 hivebox-app
    ```
 
    The application will run inside the container and output the app version.
@@ -93,7 +93,8 @@ This application simply displays the current app version and exits.
 ### Available Scripts
 
 - `pnpm start` - Run the application
-- `pnpm test` - Run tests (currently not implemented)
+- `pnpm test` - Run tests
+- `pnpm lint` - Run ts linter
 
 ### Development Notes
 

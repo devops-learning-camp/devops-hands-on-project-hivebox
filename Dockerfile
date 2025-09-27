@@ -15,13 +15,10 @@ WORKDIR /app
 # Copy only package definition files first
 COPY package.json pnpm-lock.yaml ./
 
-# Cache the pnpm store for faster dependency fetches across builds
+# Cache the pnpm store and install production dependencies in a single RUN
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
- pnpm fetch --frozen-lockfile
-
-# Install only production dependencies
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
- pnpm install --frozen-lockfile --prod
+  pnpm fetch --frozen-lockfile && \
+  pnpm install --frozen-lockfile --prod
 
 # Stage 2: Create the final lightweight production image
 FROM base
@@ -45,4 +42,4 @@ ENV NODE_ENV production
 USER hiveboxuser
 
 # Default command to run your Node.js application
-CMD ["node", "./index.ts"]
+CMD ["node", "./src/server.ts"]
